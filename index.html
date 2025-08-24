@@ -1,6 +1,814 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Abijith S V — Full‑Stack Developer Portfolio</title>
+  <meta name="description" content="Portfolio of Abijith S V, a full‑stack developer and IoT enthusiast specializing in scalable web applications and data‑driven solutions." />
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#0b172a" id="themeColorMeta">
+  <meta property="og:title" content="Abijith S V — Full‑Stack Developer" />
+  <meta property="og:description" content="Full‑stack developer & IoT enthusiast. Building scalable web apps & data‑driven solutions." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://i.ibb.co/6P0bJgY/Whats-App-Image-2024-08-25-at-01-21-42-b0fe31df.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%230aa3ff'/%3E%3Cstop offset='1' stop-color='%233b82f6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='28' width='128' height='128' fill='%230b172a'/%3E%3Cpath d='M64 16l18 34 38 6-28 27 6 39-34-19-34 19 6-39-28-27 38-6z' fill='url(%23g)'/%3E%3C/svg%3E" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Abijith S V",
+    "jobTitle": "Full‑Stack Developer",
+    "url": "",
+    "sameAs": [
+      "https://github.com/Abijithsv",
+      "https://linkedin.com/in/its-abijith"
+    ]
+  }
+  </script>
+  <style>
+    /* =====================
+        THEME & RESET
+        ===================== */
+    :root{
+      --h: 217;           /* base hue */
+      --s: 92%;           /* saturation */
+      --l-bg: 11%;        /* background lightness (ldark ~ not too dark) */
+      --l-panel: 16%;
+      --l-soft: 20%;
+      --l-accent: 54%;
+      --l-accent-2: 64%;
+      --text-strong: 98%;
+      --text: 92%;
+      --text-muted: 74%;
+      --radius: 18px;
+      --shadow: 0 10px 30px rgba(0,0,0,.25);
+      --grid-gap: 18px;
+      --ring: 2px solid hsl(var(--h), 90%, 58%);
+    }
+
+    /* Fix reset selector */
+    *,*::before,*::after{box-sizing:border-box}
+    html:focus-within{scroll-behavior:smooth}
+    html,body{height:100%}
+    body{
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(120% 120% at 15% 10%, hsl(var(--h), 50%, 14%), hsl(var(--h), 60%, var(--l-bg)) 50%);
+      color: hsla(0,0%,var(--text),.95);
+      line-height:1.55; letter-spacing:.2px;
+      overflow-x:hidden;
+    }
+    :root{color-scheme: dark}
+    @media (prefers-color-scheme: light){:root{color-scheme: light}}
+    a{color: hsl(var(--h), var(--s), calc(var(--l-accent))); text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{max-width:100%; display:block}
+
+    /* Focus visibility */
+    :where(a,button,[role="button"],input,textarea,summary,.chip).focus-visible{outline: var(--ring); outline-offset: 3px}
+
+    /* =====================
+        UTILITIES
+        ===================== */
+    .container{width:min(1100px, 92vw); margin-inline:auto}
+    .grid{display:grid; gap:var(--grid-gap)}
+    .grid-2{grid-template-columns:repeat(2,1fr)}
+    .grid-3{grid-template-columns:repeat(3,1fr)}
+    @media (max-width: 900px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+    .card{
+      background: linear-gradient(180deg,
+        hsla(var(--h),var(--s),calc(var(--l-panel)),.95),
+        hsla(var(--h),var(--s),calc(var(--l-soft)),.9));
+      border: 1px solid hsla(var(--h),30%,60%,.12);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+      transition: transform .35s ease, box-shadow .35s ease, background .35s ease;
+    }
+    .card:hover{ transform: translateY(-6px); box-shadow: 0 16px 40px rgba(10,20,40,.45) }
+
+    .pill{display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; border:1px solid hsla(var(--h),25%,60%,.18); font-size:.9rem; background: hsla(var(--h),20%,30%,.25)}
+
+    .btn{
+      --btnHue: var(--h);
+      display:inline-flex; align-items:center; gap:10px;
+      background: linear-gradient(180deg, hsl(var(--h),var(--s),calc(var(--l-accent))), hsl(var(--h),var(--s),calc(var(--l-accent-2))));
+      color: #061120; border: 0; border-radius: 14px; padding: 12px 16px; font-weight:700;
+      transition: transform .15s ease, filter .2s ease, box-shadow .3s ease; cursor:pointer;
+      box-shadow: 0 8px 24px hsla(var(--h), 70%, 50%, .25);
+    }
+    .btn:hover{ transform: translateY(-1px); filter: brightness(1.05) }
+    .btn:active{ transform: translateY(0) scale(.98) }
+    .btn.ghost{ background: transparent; border: 1px solid hsla(var(--h),30%,60%,.25); color: hsla(0,0%,var(--text-strong),.92) }
+
+    .accent{ color: hsl(var(--h), var(--s), calc(var(--l-accent))) }
+
+    .section{ padding: 72px 0 }
+    .section h2{ font-size: clamp(1.4rem, 2vw + .9rem, 2.1rem); margin:0 0 14px; letter-spacing:.4px }
+    .section p.lead{ color: hsla(0,0%,var(--text-muted),.96); margin-top:6px; max-width:70ch }
+
+    /* =====================
+        NAVBAR + PROGRESS
+        ===================== */
+    header{
+      position: sticky; top: 0; z-index: 50;
+      background: linear-gradient(180deg, hsla(var(--h),var(--s),calc(var(--l-panel)+4%),.9), hsla(var(--h),var(--s),calc(var(--l-panel)),.65));
+      border-bottom:1px solid hsla(var(--h),30%,60%,.15);
+      backdrop-filter: blur(10px);
+    }
+    .nav{ display:flex; align-items:center; justify-content:space-between; padding: 10px 0 }
+    .brand{ display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.4px }
+    .logo{ width:34px; height:34px; border-radius:10px; display:grid; place-items:center; background: radial-gradient(circle at 30% 30%, hsl(var(--h),90%,60%), hsl(var(--h),90%,40%)); box-shadow: inset 0 0 24px rgba(255,255,255,.15)}
+    nav a{ padding:10px 12px; border-radius:12px; transition: background .25s ease, color .25s ease }
+    nav a[aria-current="page"], nav a:hover{ background: hsla(var(--h), 20%, 40%, .25); color:#fff }
+    .controls{ display:flex; align-items:center; gap:10px }
+
+    .progress{position:fixed; left:0; top:0; height:3px; width:0; background: linear-gradient(90deg, hsl(var(--h),90%,60%), hsl(195, 85%, 60%)); z-index:60}
+
+    /* =====================
+        HERO
+        ===================== */
+    .hero{ display:grid; grid-template-columns: 1.2fr .8fr; gap: 28px; align-items:center; padding: 28px 0 50px }
+    .hero .title{ font-size: clamp(1.9rem, 3vw + 1.2rem, 3rem); margin: 6px 0 10px; line-height:1.15 }
+    .hero .subtitle{ color: hsla(0,0%,var(--text-muted),.98); margin: 0 0 22px }
+    .hero .cta{ display:flex; flex-wrap:wrap; gap:10px }
+    .profile-pic-container{
+      aspect-ratio: 1 / 1; border-radius: 22px; overflow:hidden; position:relative;
+      box-shadow: var(--shadow); border: 1px solid hsla(var(--h),30%,60%,.2);
+      background: radial-gradient(120% 120% at 15% 15%, hsla(var(--h),60%,35%,.45), hsla(var(--h),60%,25%,.4) 40%, transparent 60%),
+                  radial-gradient(100% 100% at 85% 85%, hsla(195,80%,45%,.25), transparent 50%);
+    }
+    .profile-pic-container img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(1.05) contrast(1.02) }
+    .stats{display:flex; gap:12px; flex-wrap:wrap; margin-top:12px}
+    .stat{display:flex; flex-direction:column; align-items:flex-start; padding:10px 12px; border-radius:14px; background: hsla(var(--h), 18%, 34%, .28); border:1px solid hsla(var(--h),30%,60%,.18)}
+    .stat b{font-size:1.05rem}
+
+    @media (max-width: 900px){ .hero{ grid-template-columns: 1fr; text-align: center; } .profile-pic-container{ max-width: 300px; margin: 0 auto;} .cta {justify-content: center;} .stat{align-items:center} }
+
+    /* =====================
+        SECTIONS & WIDGETS
+        ===================== */
+    .chipbar{ display:flex; flex-wrap:wrap; gap:8px; margin: 12px 0 8px }
+    .chip{ padding:8px 12px; border-radius:999px; border:1px solid hsla(var(--h),30%,60%,.25); background: hsla(var(--h), 18%, 34%, .28); cursor:pointer; font-size:.92rem; transition: transform .15s ease, background .2s ease }
+    .chip:hover{ transform: translateY(-1px) }
+    .chip.active{ background: linear-gradient(180deg, hsl(var(--h),var(--s),40%), hsl(var(--h),var(--s),55%)); color: #061120; font-weight:800 }
+
+    .project{ position:relative; overflow:hidden }
+    .project .thumb{ height: 180px; background: linear-gradient(120deg, hsla(var(--h), 70%, 50%, .22), hsla(200, 90%, 70%, .22)); display:grid; place-items:center; font-size: 3rem; }
+    .project .content{ padding: 16px }
+    .project h3 { margin: 0 0 8px; }
+    .project p { font-size: 0.92rem; color: hsla(0,0%,var(--text-muted),.96); margin: 0; }
+    .tagbar{ display:flex; flex-wrap:wrap; gap:6px; margin-top:12px }
+    .tag{ font-size:.75rem; padding:6px 10px; border-radius: 999px; background: hsla(var(--h), 15%, 42%, .35); border: 1px solid hsla(var(--h),30%,70%,.18) }
+
+    .tilt{ transform-style: preserve-3d; perspective: 1000px }
+
+    .timeline{ position:relative; margin-left: 14px }
+    .timeline::before{ content:""; position:absolute; left:8px; top:0; bottom:0; width:2px; background: linear-gradient(hsl(var(--h),60%,45%), transparent) }
+    .tl-item{ position:relative; padding-left: 28px; margin-bottom: 24px }
+    .tl-item::before{ content:""; position:absolute; width:14px; height:14px; left:2px; top:6px; border-radius:50%; background: hsl(var(--h),80%,60%); box-shadow: 0 0 0 6px hsla(var(--h),80%,60%,.18) }
+    .tl-item ul { padding-left: 20px; margin-top: 8px; color: hsla(0,0%,var(--text-muted),.96); }
+
+    .skills{ display:flex; flex-wrap:wrap; gap:10px }
+    .skill{ padding: 10px 12px; border-radius: 12px; border:1px solid hsla(var(--h),30%,60%,.25); background: hsla(var(--h), 18%, 34%, .28); display:flex; align-items:center; gap:8px }
+    .meter{ width:160px; height:10px; background: hsla(var(--h), 20%, 40%, .35); border-radius:999px; overflow:hidden }
+    .meter > i{ display:block; height:100%; background: linear-gradient(90deg, hsl(var(--h),var(--s),55%), hsl(var(--h),var(--s),70%)) }
+
+    /* Reveal on scroll */
+    .reveal{ opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease }
+    .reveal.visible{ opacity: 1; transform: translateY(0) }
+
+    /* Footer */
+    footer{ padding: 60px 0; color: hsla(0,0%,var(--text-muted),.96) }
+
+    /* Light mode support */
+    body.light{
+      --l-bg: 96%;
+      --l-panel: 98%;
+      --l-soft: 93%;
+      --text-strong: 12%;
+      --text: 14%;
+      --text-muted: 40%;
+      --shadow: 0 10px 30px rgba(5,15,35,.08);
+      background: radial-gradient(120% 120% at 15% 10%, hsl(var(--h), 90%, 99%), hsl(var(--h), 60%, var(--l-bg)) 50%);
+      color: hsla(0,0%, var(--text), .95);
+    }
+    body.light .card{ border-color: hsla(var(--h),30%,40%,.18) }
+    body.light .chip.active{ color:#061120 }
+
+    /* Command palette */
+    .cmdk{position:fixed; inset:0; display:none; place-items:center; background:rgba(0,0,0,.45); z-index:80}
+    .cmdk[open]{display:grid}
+    .cmdk-panel{width:min(720px,92vw); background:var(--panel, #101827); border-radius:16px; padding:12px; border:1px solid hsla(var(--h),30%,60%,.25)}
+    .cmdk input{width:100%; padding:12px 14px; border-radius:10px; border:1px solid hsla(var(--h),30%,60%,.25); background:hsla(var(--h), 20%, 30%, .3); color:inherit}
+    .cmdk ul{list-style:none; margin:10px 0 0; padding:0; max-height:46vh; overflow:auto}
+    .cmdk li{padding:10px 12px; border-radius:10px; cursor:pointer}
+    .cmdk li[aria-selected="true"], .cmdk li:hover{background:hsla(var(--h), 20%, 40%, .25)}
+
+    /* Toast */
+    .toast{position:fixed; right:16px; bottom:16px; padding:12px 14px; border-radius:12px; background:hsla(var(--h), 20%, 30%, .8); color:#fff; border:1px solid hsla(var(--h),30%,60%,.25); box-shadow:var(--shadow); opacity:0; transform:translateY(8px); transition:all .3s ease; z-index:70}
+    .toast.show{opacity:1; transform:translateY(0)}
+
+    /* Print */
+    @media print{
+      header, .chipbar, .btn, .tilt, .cmdk, .progress {display:none !important}
+      .card{box-shadow:none !important; border:1px solid #ddd}
+      body{background:#fff; color:#000}
+    }
+
+    /* Canvas backdrop (constellation) */
+    #bg{position:fixed; inset:0; z-index:-1}
+  </style>
+</head>
+<body>
+  <a href="#main" class="pill" style="position:absolute;left:-9999px;top:auto" onfocus="this.style.left='16px'">Skip to content</a>
+  <canvas id="bg" aria-hidden="true"></canvas>
+  <div class="progress" id="progress"></div>
+
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M12 2l3.5 6.5L22 9l-5 5 .8 7-5.8-3.3L6.2 21 7 14 2 9l6.5-.5L12 2z" fill="white"/>
+          </svg>
+        </div>
+        <span>Abijith S V</span>
+      </div>
+      <nav class="controls" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#achievements">Achievements</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+        <span class="pill" title="Light/Dark toggle">
+          <input id="modeToggle" type="checkbox" aria-label="Toggle light/dark"> <small>Light</small>
+        </span>
+        <span class="pill" title="Hue">
+          <label for="hue" style="font-size:.8rem">Hue</label>
+          <input id="hue" type="range" min="0" max="360" value="217" style="accent-color:hsl(var(--h),80%,60%)">
+        </span>
+        <button class="btn ghost" id="openCmd" aria-haspopup="dialog" aria-controls="cmdk">⌘K</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="container hero section">
+      <div>
+        <div class="pill" style="margin-bottom:10px">💻 Full‑Stack Developer & IoT Enthusiast</div>
+        <h1 class="title">Hi, I'm <span class="accent">Abijith S V</span> — building scalable web apps & data‑driven solutions.</h1>
+        <p class="subtitle">An aspiring software engineer with real‑world experience in Angular, Node.js, and IoT, focused on writing maintainable code and delivering timely features.</p>
+        <div class="cta">
+          <a class="btn" href="#projects">View My Work</a>
+          <a class="btn ghost" href="#contact">Get In Touch</a>
+          <button class="btn" id="copyEmail">Copy Email</button>
+        </div>
+        <div class="stats" aria-label="Quick stats">
+          <div class="stat" data-count="5"><b><span class="counter">0</span>+ Projects</b><small>Full‑stack, ML & IoT</small></div>
+          <div class="stat" data-count="6"><b><span class="counter">0</span> Hackathons</b><small>Finalist & Winner</small></div>
+          <div class="stat" data-count="5"><b><span class="counter">0</span> Workshops</b><small>Organized for peers</small></div>
+        </div>
+      </div>
+      <div class="profile-pic-container card tilt" aria-hidden="true">
+        <img loading="lazy" decoding="async" src="MeAce.JPG" alt="Portrait of Abijith S V">
+      </div>
+    </section>
+
+    <section id="about" class="section container reveal card" style="padding:28px">
+      <h2>About Me</h2>
+      <p class="lead">I'm a software engineer who enjoys turning complex problems into elegant, user‑friendly experiences. My work blends real‑world experience developing scalable web applications using Angular, Node.js, and MySQL. I actively contribute to team projects by delivering features on time and writing maintainable code using modern development practices.</p>
+      <div class="chipbar" role="list">
+        <span class="chip" role="listitem">#FullStackDev</span>
+        <span class="chip" role="listitem">#IoT</span>
+        <span class="chip" role="listitem">#DataAnalytics</span>
+        <span class="chip" role="listitem">#WebDevelopment</span>
+      </div>
+    </section>
+
+    <section id="skills" class="section container reveal">
+      <h2>Technical Skills</h2>
+      <p class="lead">Core competencies and technologies I work with daily.</p>
+      <div class="skills" id="skillsList">
+        <div class="skill"><span>Python</span><div class="meter"><i style="width:90%"></i></div></div>
+        <div class="skill"><span>JavaScript</span><div class="meter"><i style="width:85%"></i></div></div>
+        <div class="skill"><span>Angular</span><div class="meter"><i style="width:80%"></i></div></div>
+        <div class="skill"><span>Node.js/Express</span><div class="meter"><i style="width:85%"></i></div></div>
+        <div class="skill"><span>MySQL</span><div class="meter"><i style="width:80%"></i></div></div>
+        <div class="skill"><span>Firebase</span><div class="meter"><i style="width:75%"></i></div></div>
+        <div class="skill"><span>HTML/CSS</span><div class="meter"><i style="width:95%"></i></div></div>
+        <div class="skill"><span>C++</span><div class="meter"><i style="width:70%"></i></div></div>
+        <div class="skill"><span>PHP</span><div class="meter"><i style="width:70%"></i></div></div>
+        <div class="skill"><span>Tableau</span><div class="meter"><i style="width:75%"></i></div></div>
+        <div class="skill"><span>Streamlit</span><div class="meter"><i style="width:80%"></i></div></div>
+      </div>
+      <div class="chipbar">
+        <button class="chip" id="shuffleSkills">Shuffle</button>
+        <button class="chip" id="sortSkills">Sort A→Z</button>
+      </div>
+    </section>
+
+    <section id="projects" class="section container reveal">
+      <h2>Projects</h2>
+      <div class="chipbar" id="filterBar">
+        <button class="chip active" data-filter="*">All</button>
+        <button class="chip" data-filter="fullstack">Full‑Stack</button>
+        <button class="chip" data-filter="ml">ML/Data</button>
+        <button class="chip" data-filter="mobile">Mobile/IoT</button>
+        <input class="pill" id="searchProjects" placeholder="Search projects…" style="margin-left:auto" aria-label="Search projects">
+      </div>
+
+      <div class="grid grid-3" id="projectGrid">
+        <article class="card project tilt" data-tags="fullstack" tabindex="0">
+          <div class="thumb" aria-hidden="true">📚</div>
+          <div class="content">
+            <h3>Book Library Application</h3>
+            <p>Engineered a multi‑user library app with optimized query indexing, slashing data lookup time by 50%.</p>
+            <div class="tagbar"><span class="tag">Angular</span><span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">MySQL</span></div>
+            <div class="chipbar"><button class="chip openModal">Details</button></div>
+          </div>
+        </article>
+        <article class="card project tilt" data-tags="ml" tabindex="0">
+          <div class="thumb" aria-hidden="true">📈</div>
+          <div class="content">
+            <h3>Market Basket Analysis</h3>
+            <p>Interactive Tableau dashboard to analyze product co‑purchase patterns, sales trends, KPIs, and customer insights.</p>
+            <div class="tagbar"><span class="tag">Tableau</span><span class="tag">Data Viz</span><span class="tag">Analytics</span></div>
+            <div class="chipbar"><button class="chip openModal">Details</button></div>
+          </div>
+        </article>
+        <article class="card project tilt" data-tags="ml" tabindex="0">
+          <div class="thumb" aria-hidden="true">🌾</div>
+          <div class="content">
+            <h3>Spatial Crop Yield Prediction</h3>
+            <p>Deployed an ML model via a Streamlit web app to predict crop yields using spatial data, optimizing resource allocation.</p>
+            <div class="tagbar"><span class="tag">Python</span><span class="tag">Machine Learning</span><span class="tag">Streamlit</span></div>
+            <div class="chipbar"><a class="chip" href="https://github.com/Abijithsv/Spatial-Crop-Yield-Prediction-Model" target="_blank" rel="noopener">GitHub</a> <button class="chip openModal">Details</button></div>
+          </div>
+        </article>
+        <article class="card project tilt" data-tags="mobile" tabindex="0">
+          <div class="thumb" aria-hidden="true">💧</div>
+          <div class="content">
+            <h3>Jaldi.in – Water Management</h3>
+            <p>SIH '24 project integrating predictive maintenance, QGIS leak mapping, and payments in an Android app.</p>
+            <div class="tagbar"><span class="tag">Android</span><span class="tag">Firebase</span><span class="tag">Python</span><span class="tag">QGIS</span></div>
+            <div class="chipbar"><button class="chip openModal">Details</button></div>
+          </div>
+        </article>
+        <article class="card project tilt" data-tags="ml" tabindex="0">
+          <div class="thumb" aria-hidden="true">📰</div>
+          <div class="content">
+            <h3>Truth Mesh Fake News Detection</h3>
+            <p>A crowd‑sourced verification platform with NLP pipelines and classification models, achieving 85%+ accuracy.</p>
+            <div class="tagbar"><span class="tag">NLP</span><span class="tag">Firebase</span><span class="tag">Streamlit</span></div>
+            <div class="chipbar"><button class="chip openModal">Details</button></div>
+          </div>
+        </article>
+        <article class="card project tilt" data-tags="mobile" tabindex="0">
+          <div class="thumb" aria-hidden="true">🧠</div>
+          <div class="content">
+            <h3>Dementia‑Assist Application</h3>
+            <p>SIH '23 assistive app with reminders, cognitive exercises, and geofencing for patient safety and caregiver support.</p>
+            <div class="tagbar"><span class="tag">Android</span><span class="tag">GeoFencing</span><span class="tag">Mobile Health</span></div>
+            <div class="chipbar"><button class="chip openModal">Details</button></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="experience" class="section container reveal">
+      <h2>Experience</h2>
+      <div class="timeline">
+        <div class="tl-item card" style="padding:14px">
+          <strong>Full‑Stack Developer Trainee — Matrimony.com</strong>
+          <div class="pill" style="margin:8px 0">Dec 2024 — Apr 2025</div>
+          <ul>
+            <li>Engineered a data management system using Node.js and MySQL, implementing robust CRUD functionalities and optimized database schemas.</li>
+          </ul>
+        </div>
+        <div class="tl-item card" style="padding:14px">
+          <strong>Tech Event Organizer — SASTRA University</strong>
+          <div class="pill" style="margin:8px 0">Sep 2024 — Present</div>
+          <ul>
+            <li>Organized and conducted over five university‑level workshops on Web Development and IoT, impacting 100+ students.</li>
+          </ul>
+        </div>
+        <div class="tl-item card" style="padding:14px">
+          <strong>IoT Intern — Bahwan CyberTek</strong>
+          <div class="pill" style="margin:8px 0">Jun 2024 — Jul 2024</div>
+          <ul>
+            <li>Designed and deployed a real‑time IoT data pipeline using ActiveMQ, enhancing data throughput for industrial monitoring.</li>
+          </ul>
+        </div>
+        <div class="tl-item card" style="padding:14px">
+          <strong>Web Developer Intern — Business Web Solutions</strong>
+          <div class="pill" style="margin:8px 0">Jan 2024 — Feb 2024</div>
+          <ul>
+            <li>Delivered three full‑stack PHP apps with secure auth and billing logic, cutting invoice processing time by 85%.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="achievements" class="section container reveal">
+      <h2>Achievements</h2>
+      <div class="timeline">
+        <div class="tl-item card" style="padding:14px">
+          <strong>2× Smart India Hackathon Finalist (2023 & 2024)</strong>
+          <p style="margin:8px 0">Selected among 86,000+ teams; built GIS water management and dementia‑assist solutions.</p>
+        </div>
+        <div class="tl-item card" style="padding:14px">
+          <strong>TATA Communication Hackathon Runner‑Up (2023)</strong>
+          <p style="margin:8px 0">Created “Truth Mesh”, a fake news verification platform using NLP and real‑time sync.</p>
+        </div>
+        <div class="tl-item card" style="padding:14px">
+          <strong>Top 10 @ IIT Madras Hackathon</strong>
+          <p style="margin:8px 0">Designed an AI‑powered crop disease detection solution, ranked top 10 out of 1,318 teams.</p>
+        </div>
+        <div class="tl-item card" style="padding:14px">
+          <strong>Oracle APEX Hackathon Winner</strong>
+          <p style="margin:8px 0">Developed a low‑code incident reporting app for an NGO, reducing documentation time by 60%.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="education" class="section container reveal">
+      <h2>Education</h2>
+      <div class="timeline">
+        <div class="tl-item card" style="padding:14px">
+          <strong>B.Tech in Computer Science (IoT & Automation)</strong>
+          <div class="pill" style="margin:8px 0">SASTRA Deemed University · 2022 — Present</div>
+          <p>CGPA: 8.18 / 10.0</p>
+        </div>
+        <div class="tl-item card" style="padding:14px">
+          <strong>Higher Secondary Education (CBSE)</strong>
+          <div class="pill" style="margin:8px 0">St. Britto's Academy · 2020 — 2022</div>
+          <p>Percentage: 93.6%</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section container reveal card" style="padding:28px">
+      <h2>Contact</h2>
+      <p class="lead">Open to roles in software engineering and IoT. Let's connect and build something great together.</p>
+      <div class="grid grid-2" style="margin-top:20px">
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <a href="mailto:abijith1908@gmail.com" class="pill">📧 abijith1908@gmail.com</a>
+          <a href="https://linkedin.com/in/its-abijith" target="_blank" class="pill" rel="noopener">🔗 linkedin.com/in/its-abijith</a>
+          <a href="https://github.com/Abijithsv" target="_blank" class="pill" rel="noopener">🔗 github.com/Abijithsv</a>
+        </div>
+        <form class="card" id="contactForm" style="padding:14px" novalidate>
+          <label for="name">Name</label>
+          <input required id="name" style="margin:6px 0 10px; width:100%" class="pill" type="text" placeholder="Your name"/>
+          <label for="email">Email</label>
+          <input required id="email" style="margin:6px 0 10px; width:100%" class="pill" type="email" placeholder="you@example.com"/>
+          <label for="message">Message</label>
+          <textarea required id="message" style="margin:6px 0 12px; width:100%; resize:vertical" class="pill" placeholder="Say hello..." rows="5"></textarea>
+          <div class="chipbar">
+            <label class="pill"><input type="checkbox" id="ccMe"/> CC me</label>
+            <label class="pill"><input type="checkbox" id="newsletter"/> Join newsletter</label>
+          </div>
+          <button class="btn" type="submit">Send Message</button>
+          <small id="formHelp" style="display:block; opacity:.8; margin-top:6px">This is a demo form. Validation runs locally.</small>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container">
+    <div class="grid grid-2">
+      <div>© <span id="year"></span> Abijith S V. Built with ♥ as a single HTML file.</div>
+      <div style="text-align:right">Theme: Blue/White L‑Dark</div>
+    </div>
+  </footer>
+
+  <!-- Command palette dialog -->
+  <dialog class="cmdk" id="cmdk" aria-label="Command palette">
+    <div class="cmdk-panel">
+      <input id="cmdInput" placeholder="Type a command: go projects, filter ml, hue 195, theme light… (Esc to close)" aria-label="Command input"/>
+      <ul id="cmdList"></ul>
+    </div>
+  </dialog>
+
+  <!-- Modal dialog for project details -->
+  <dialog id="projectModal" class="card" style="border:none; max-width:min(720px, 92vw);">
+    <article style="padding:18px">
+      <header style="display:flex; justify-content:space-between; align-items:center; gap:10px">
+        <h3 id="modalTitle" style="margin:0">Project</h3>
+        <button class="btn ghost" id="closeModal" aria-label="Close">Close</button>
+      </header>
+      <p id="modalBody" style="margin:12px 0 0"></p>
+    </article>
+  </dialog>
+
+  <!-- Toast -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    /* =====================
+        SMOOTH REVEAL ON SCROLL + SCROLLSPY + PROGRESS
+        ===================== */
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, { threshold:.12 });
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+    const sections = [...document.querySelectorAll('main section[id]')];
+    const navlinks = [...document.querySelectorAll('nav a[href^="#"]')];
+    const spy = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          const id = entry.target.id;
+          navlinks.forEach(a=>a.removeAttribute('aria-current'));
+          const active = navlinks.find(a=>a.getAttribute('href') === '#'+id);
+          if(active) active.setAttribute('aria-current','page');
+        }
+      })
+    }, { rootMargin: "-40% 0px -55% 0px", threshold: [0, .2, .5, 1]});
+    sections.forEach(s=>spy.observe(s));
+
+    const progress = document.getElementById('progress');
+    const setProgress = ()=>{
+      const h = document.documentElement;
+      const scrolled = (h.scrollTop)/(h.scrollHeight - h.clientHeight);
+      progress.style.width = (scrolled*100).toFixed(2)+'%';
+    };
+    setProgress();
+    document.addEventListener('scroll', setProgress, {passive:true});
+
+    /* =====================
+        THEME TOGGLE + PERSISTENCE + HUE CONTROL
+        ===================== */
+    const toggle = document.getElementById('modeToggle');
+    const hue = document.getElementById('hue');
+    const metaTheme = document.getElementById('themeColorMeta');
+    const prefersLight = window.matchMedia('(prefers-color-scheme: light)');
+
+    const loadTheme = ()=>{
+      const saved = localStorage.getItem('theme');
+      const isLight = saved ? saved === 'light' : prefersLight.matches;
+      document.body.classList.toggle('light', isLight);
+      toggle.checked = isLight;
+      metaTheme.content = isLight ? '#f5f7ff' : '#0b172a';
+      const savedHue = +localStorage.getItem('hue') || 217;
+      document.documentElement.style.setProperty('--h', savedHue);
+      hue.value = savedHue;
+    };
+    loadTheme();
+    toggle.addEventListener('change', ()=>{
+      const isLight = toggle.checked;
+      document.body.classList.toggle('light', isLight);
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      metaTheme.content = isLight ? '#f5f7ff' : '#0b172a';
+    });
+    hue.addEventListener('input', ()=>{
+      document.documentElement.style.setProperty('--h', hue.value);
+    });
+    hue.addEventListener('change', ()=>{
+      localStorage.setItem('hue', hue.value);
+      showToast('Hue set to ' + hue.value);
+    })
+
+    /* =====================
+        3D TILT HOVER (fixed string template)
+        ===================== */
+    const applyTilt = (el)=>{
+      let rID = null;
+      const onMove = (e)=>{
+        const rect = el.getBoundingClientRect();
+        const x = e.clientX - rect.left, y = e.clientY - rect.top;
+        const cx = x/rect.width - .5, cy = y/rect.height - .5;
+        const rx = (cy * -8).toFixed(2), ry = (cx * 10).toFixed(2);
+        cancelAnimationFrame(rID);
+        rID = requestAnimationFrame(()=>{
+          el.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
+        });
+      };
+      const reset = ()=> el.style.transform = '';
+      el.addEventListener('mousemove', onMove);
+      el.addEventListener('mouseleave', reset);
+    };
+    document.querySelectorAll('.tilt').forEach(applyTilt);
+
+    /* =====================
+        PROJECT FILTERS + SEARCH
+        ===================== */
+    const filterBar = document.getElementById('filterBar');
+    const projects = Array.from(document.querySelectorAll('#projectGrid .project'));
+    const searchBox = document.getElementById('searchProjects');
+
+    const applyFilters = ()=>{
+      const activeBtn = filterBar.querySelector('.chip.active');
+      const key = activeBtn?.dataset.filter || '*';
+      const q = (searchBox.value||'').toLowerCase();
+      projects.forEach(p=>{
+        const tags = p.dataset.tags||'';
+        const text = p.innerText.toLowerCase();
+        const tagOK = key==='*' || tags.includes(key);
+        const textOK = !q || text.includes(q);
+        p.style.display = (tagOK && textOK) ? '' : 'none';
+      })
+    }
+
+    filterBar.addEventListener('click', (e)=>{
+      const btn = e.target.closest('.chip');
+      if(!btn || !btn.dataset.filter) return;
+      filterBar.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+      btn.classList.add('active');
+      applyFilters();
+    });
+    searchBox.addEventListener('input', applyFilters);
+
+    // Modal for project details
+    const modal = document.getElementById('projectModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalBody = document.getElementById('modalBody');
+    document.getElementById('closeModal').addEventListener('click', ()=> modal.close());
+    document.addEventListener('click', (e)=>{
+      const btn = e.target.closest('.openModal');
+      if(!btn) return;
+      const card = btn.closest('.project');
+      modalTitle.textContent = card.querySelector('h3').textContent;
+      modalBody.innerHTML = `<ul style="padding-left:18px;line-height:1.6">`
+        + `<li>Problem statement, approach, and measurable outcomes.</li>`
+        + `<li>Tech stack and architecture decisions.</li>`
+        + `<li>What I'd improve in v2: performance, UX, testing.</li>`
+        + `</ul>`;
+      modal.showModal();
+    });
+
+    /* =====================
+        STATS COUNTER (respect reduced motion)
+        ===================== */
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const counters = document.querySelectorAll('.stat');
+    const counterIO = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(!entry.isIntersecting) return;
+        const el = entry.target;
+        const end = +el.dataset.count || 0;
+        const span = el.querySelector('.counter');
+        if(span.dataset.done) return;
+        span.dataset.done = '1';
+        if(reduceMotion){ span.textContent = end; return; }
+        let cur = 0; const step = Math.ceil(end/40);
+        const tick = ()=>{ cur = Math.min(end, cur+step); span.textContent = cur; if(cur<end) requestAnimationFrame(tick); };
+        tick();
+      })
+    }, {threshold:.6});
+    counters.forEach(c=>counterIO.observe(c));
+
+    /* =====================
+        SKILLS: shuffle / sort
+        ===================== */
+    const skillsList = document.getElementById('skillsList');
+    const skillNodes = Array.from(skillsList.children);
+    document.getElementById('shuffleSkills').addEventListener('click', ()=>{
+      const arr = [...skillNodes].sort(()=>Math.random()-.5);
+      arr.forEach(n=>skillsList.appendChild(n));
+    });
+    document.getElementById('sortSkills').addEventListener('click', ()=>{
+      const arr = [...skillNodes].sort((a,b)=>a.textContent.localeCompare(b.textContent));
+      arr.forEach(n=>skillsList.appendChild(n));
+    });
+
+    /* =====================
+        CONTACT FORM (client‑side validation) + COPY EMAIL + RÉSUMÉ DOWNLOAD
+        ===================== */
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const name = form.querySelector('#name');
+      const email = form.querySelector('#email');
+      const msg = form.querySelector('#message');
+      const valid = name.value.trim().length>1 && /.+@.+\..+/.test(email.value) && msg.value.trim().length>5;
+      if(!valid){ showToast('Please fill out all fields correctly.'); return; }
+      showToast('Thanks, '+name.value.split(' ')[0]+'! Your (demo) message is validated.');
+      form.reset();
+    });
+
+    document.getElementById('copyEmail').addEventListener('click', async()=>{
+      try{ await navigator.clipboard.writeText('abijith1908@gmail.com'); showToast('Email copied to clipboard'); }
+      catch{ showToast('Could not copy email'); }
+    });
+
+    document.getElementById('downloadResume').addEventListener('click', (e)=>{
+      e.preventDefault();
+      const blob = new Blob([
+        `Abijith S V — Résumé\n\nFull-Stack Developer \nEmail: abijith1908@gmail.com\nGitHub: github.com/Abijithsv\nLinkedIn: linkedin.com/in/its-abijith\n\nProjects: Book Library, Market Basket Analysis, Spatial Crop Yield Prediction, Jaldi.in Water Management, Truth Mesh, Dementia‑Assist.\n\nExperience: Matrimony.com (Trainee), BCT (IoT Intern), Business Web Solutions (Web Dev Intern).\n\nEducation: B.Tech CSE (IoT & Automation) @ SASTRA.\n`], {type:'text/plain'});
+      const url = URL.createObjectURL(blob);
+      const a = Object.assign(document.createElement('a'), {href:url, download:'Abijith_S_V_Resume.txt'});
+      document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+      showToast('Résumé downloaded');
+    });
+
+    /* =====================
+        COMMAND PALETTE (Ctrl/Cmd+K)
+        ===================== */
+    const cmd = document.getElementById('cmdk');
+    const cmdInput = document.getElementById('cmdInput');
+    const cmdList = document.getElementById('cmdList');
+    const openCmd = ()=>{ cmd.showModal(); cmdInput.value=''; renderCmd(''); cmdInput.focus(); };
+    const closeCmd = ()=> cmd.close();
+    document.getElementById('openCmd').addEventListener('click', openCmd);
+    document.addEventListener('keydown', (e)=>{
+      if((e.ctrlKey || e.metaKey) && e.key.toLowerCase()==='k'){ e.preventDefault(); openCmd(); }
+      if(e.key==='Escape' && cmd.open) closeCmd();
+    });
+
+    const cmds = [
+      {label:'Go to About', action:()=>location.hash='#about'},
+      {label:'Go to Skills', action:()=>location.hash='#skills'},
+      {label:'Go to Projects', action:()=>location.hash='#projects'},
+      {label:'Go to Experience', action:()=>location.hash='#experience'},
+      {label:'Filter: Full‑Stack', action:()=>clickFilter('fullstack')},
+      {label:'Filter: ML/Data', action:()=>clickFilter('ml')},
+      {label:'Filter: Mobile/IoT', action:()=>clickFilter('mobile')},
+      {label:'Theme: Light', action:()=>{toggle.checked=true; toggle.dispatchEvent(new Event('change'));}},
+      {label:'Theme: Dark', action:()=>{toggle.checked=false; toggle.dispatchEvent(new Event('change'));}},
+      {label:'Hue: 195', action:()=>{hue.value=195; hue.dispatchEvent(new Event('change'));}},
+      {label:'Hue: 280', action:()=>{hue.value=280; hue.dispatchEvent(new Event('change'));}},
+      {label:'Copy Email', action:()=>document.getElementById('copyEmail').click()}
+    ];
+
+    function renderCmd(q){
+      const items = cmds.filter(c=>c.label.toLowerCase().includes(q.toLowerCase()));
+      cmdList.innerHTML = items.map((c,i)=>`<li role="option" data-i="${i}" ${i===0?'aria-selected="true"':''}>${c.label}</li>`).join('');
+    }
+    cmdInput.addEventListener('input', ()=>renderCmd(cmdInput.value));
+    cmdList.addEventListener('click', (e)=>{
+      const li = e.target.closest('li');
+      if(!li) return; const i = +li.dataset.i; cmds.filter(c=>c.label.toLowerCase().includes(cmdInput.value.toLowerCase()))[i]?.action(); closeCmd();
+    });
+    cmd.addEventListener('keydown', (e)=>{
+      const options = Array.from(cmdList.querySelectorAll('li'));
+      let idx = options.findIndex(o=>o.getAttribute('aria-selected')==='true');
+      if(e.key==='ArrowDown'){ e.preventDefault(); idx = Math.min(options.length-1, idx+1); }
+      else if(e.key==='ArrowUp'){ e.preventDefault(); idx = Math.max(0, idx-1); }
+      else if(e.key==='Enter'){ e.preventDefault(); options[idx]?.click(); return; }
+      options.forEach(o=>o.removeAttribute('aria-selected')); options[idx]?.setAttribute('aria-selected','true');
+    });
+
+    function clickFilter(tag){
+      const btn = [...filterBar.querySelectorAll('.chip')].find(b=>b.dataset.filter===tag);
+      if(btn){ btn.click(); showToast('Filter: '+tag); }
+    }
+
+    /* =====================
+        YEAR & TOAST
+        ===================== */
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const toast = document.getElementById('toast');
+    let toastTimer;
+    function showToast(text){
+      clearTimeout(toastTimer);
+      toast.textContent = text; toast.classList.add('show');
+      toastTimer = setTimeout(()=>toast.classList.remove('show'), 2400);
+    }
+
+    /* =====================
+        CONSTELLATION BACKDROP (canvas, tiny + efficient)
+        ===================== */
+    const canvas = document.getElementById('bg');
+    const ctx = canvas.getContext('2d');
+    let W,H,stars=[];
+    const dpr = Math.min(2, window.devicePixelRatio||1);
+    function resize(){ W = canvas.width = innerWidth*dpr; H = canvas.height = innerHeight*dpr; canvas.style.width=innerWidth+'px'; canvas.style.height=innerHeight+'px'; stars = Array.from({length: Math.round((W*H)/60000)}, ()=>({x:Math.random()*W, y:Math.random()*H, r:Math.random()*1.6+0.2, vx:(Math.random()-.5)*.12, vy:(Math.random()-.5)*.12})); }
+    resize(); addEventListener('resize', resize);
+    function step(){
+      ctx.clearRect(0,0,W,H);
+      ctx.fillStyle = `hsla(${getComputedStyle(document.documentElement).getPropertyValue('--h')}, 70%, 60%, .9)`;
+      for(const s of stars){
+        s.x+=s.vx; s.y+=s.vy; if(s.x<0) s.x=W; if(s.x>W) s.x=0; if(s.y<0) s.y=H; if(s.y>H) s.y=0;
+        ctx.beginPath(); ctx.arc(s.x, s.y, s.r*dpr, 0, Math.PI*2); ctx.fill();
+      }
+      if(!reduceMotion) requestAnimationFrame(step);
+    }
+    if(!reduceMotion) requestAnimationFrame(step);
+
+    /* =====================
+        KEYBOARD SHORTCUTS FOR SECTIONS
+        ===================== */
+    const shortcuts = { 'g p':'#projects', 'g s':'#skills', 'g e':'#experience', 'g a':'#about', 'g c':'#contact' };
+    let buffer='';
+    document.addEventListener('keydown', (e)=>{
+      if(e.target.matches('input,textarea,dialog, [contenteditable]')) return;
+      buffer += (e.key||'').toLowerCase(); buffer = buffer.slice(-3);
+      for(const [seq,hash] of Object.entries(shortcuts)){
+        if(buffer.endsWith(seq)) { location.hash = hash; buffer=''; showToast('Jumped to '+hash.slice(1)); }
+      }
+    });
+  </script>
+</body>
+</html>
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abijith S V - Data Engineer Portfolio</title>
@@ -483,3 +1291,5 @@ time by 50% via optimized query indexing.</p>
 </body>
 </html>
 
+
+ -->
