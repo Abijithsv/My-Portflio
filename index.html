@@ -27,13 +27,10 @@
   }
   </script>
   <style>
-    /* =====================
-        THEME & RESET
-        ===================== */
     :root{
-      --h: 217;           /* base hue */
-      --s: 92%;           /* saturation */
-      --l-bg: 11%;        /* background lightness (ldark ~ not too dark) */
+      --h: 217;
+      --s: 92%;
+      --l-bg: 11%;
       --l-panel: 16%;
       --l-soft: 20%;
       --l-accent: 54%;
@@ -45,9 +42,9 @@
       --shadow: 0 10px 30px rgba(0,0,0,.25);
       --grid-gap: 18px;
       --ring: 2px solid hsl(var(--h), 90%, 58%);
+      --nav-h: 62px;
     }
 
-    /* Fix reset selector */
     *,*::before,*::after{box-sizing:border-box}
     html:focus-within{scroll-behavior:smooth}
     html,body{height:100%}
@@ -57,19 +54,15 @@
       color: hsla(0,0%,var(--text),.95);
       line-height:1.55; letter-spacing:.2px;
       overflow-x:hidden;
+      padding-top: var(--nav-h);
     }
     :root{color-scheme: dark}
     @media (prefers-color-scheme: light){:root{color-scheme: light}}
     a{color: hsl(var(--h), var(--s), calc(var(--l-accent))); text-decoration:none}
     a:hover{text-decoration:underline}
     img{max-width:100%; display:block}
-
-    /* Focus visibility */
     :where(a,button,[role="button"],input,textarea,summary,.chip).focus-visible{outline: var(--ring); outline-offset: 3px}
 
-    /* =====================
-        UTILITIES
-        ===================== */
     .container{width:min(1100px, 92vw); margin-inline:auto}
     .grid{display:grid; gap:var(--grid-gap)}
     .grid-2{grid-template-columns:repeat(2,1fr)}
@@ -106,29 +99,27 @@
 
     .section{ padding: 72px 0 }
     .section h2{ font-size: clamp(1.4rem, 2vw + .9rem, 2.1rem); margin:0 0 14px; letter-spacing:.4px }
+    .section h3{ font-size: 1.1rem; margin: 0 0 8px; letter-spacing:.3px }
     .section p.lead{ color: hsla(0,0%,var(--text-muted),.96); margin-top:6px; max-width:70ch }
 
-    /* =====================
-        NAVBAR + PROGRESS
-        ===================== */
     header{
-      position: sticky; top: 0; z-index: 50;
+      position: fixed; top: 0; left:0; right:0;
+      height: var(--nav-h);
+      z-index: 50;
       background: linear-gradient(180deg, hsla(var(--h),var(--s),calc(var(--l-panel)+4%),.9), hsla(var(--h),var(--s),calc(var(--l-panel)),.65));
       border-bottom:1px solid hsla(var(--h),30%,60%,.15);
       backdrop-filter: blur(10px);
+      display: flex; align-items: center;
     }
-    .nav{ display:flex; align-items:center; justify-content:space-between; padding: 10px 0 }
+    .nav{ display:flex; align-items:center; justify-content:space-between; width: 100%; }
     .brand{ display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.4px }
     .logo{ width:34px; height:34px; border-radius:10px; display:grid; place-items:center; background: radial-gradient(circle at 30% 30%, hsl(var(--h),90%,60%), hsl(var(--h),90%,40%)); box-shadow: inset 0 0 24px rgba(255,255,255,.15)}
     nav a{ padding:10px 12px; border-radius:12px; transition: background .25s ease, color .25s ease }
     nav a[aria-current="page"], nav a:hover{ background: hsla(var(--h), 20%, 40%, .25); color:#fff }
     .controls{ display:flex; align-items:center; gap:10px }
 
-    .progress{position:fixed; left:0; top:0; height:3px; width:0; background: linear-gradient(90deg, hsl(var(--h),90%,60%), hsl(195, 85%, 60%)); z-index:60}
+    .progress{position:fixed; left:0; top: var(--nav-h); height:3px; width:0; background: linear-gradient(90deg, hsl(var(--h),90%,60%), hsl(195, 85%, 60%)); z-index:60}
 
-    /* =====================
-        HERO
-        ===================== */
     .hero{ display:grid; grid-template-columns: 1.2fr .8fr; gap: 28px; align-items:center; padding: 28px 0 50px }
     .hero .title{ font-size: clamp(1.9rem, 3vw + 1.2rem, 3rem); margin: 6px 0 10px; line-height:1.15 }
     .hero .subtitle{ color: hsla(0,0%,var(--text-muted),.98); margin: 0 0 22px }
@@ -146,19 +137,16 @@
 
     @media (max-width: 900px){ .hero{ grid-template-columns: 1fr; text-align: center; } .profile-pic-container{ max-width: 300px; margin: 0 auto;} .cta {justify-content: center;} .stat{align-items:center} }
 
-    /* =====================
-        SECTIONS & WIDGETS
-        ===================== */
     .chipbar{ display:flex; flex-wrap:wrap; gap:8px; margin: 12px 0 8px }
     .chip{ padding:8px 12px; border-radius:999px; border:1px solid hsla(var(--h),30%,60%,.25); background: hsla(var(--h), 18%, 34%, .28); cursor:pointer; font-size:.92rem; transition: transform .15s ease, background .2s ease }
     .chip:hover{ transform: translateY(-1px) }
     .chip.active{ background: linear-gradient(180deg, hsl(var(--h),var(--s),40%), hsl(var(--h),var(--s),55%)); color: #061120; font-weight:800 }
 
-    .project{ position:relative; overflow:hidden }
-    .project .thumb{ height: 180px; background: linear-gradient(120deg, hsla(var(--h), 70%, 50%, .22), hsla(200, 90%, 70%, .22)); display:grid; place-items:center; font-size: 3rem; }
-    .project .content{ padding: 16px }
-    .project h3 { margin: 0 0 8px; }
-    .project p { font-size: 0.92rem; color: hsla(0,0%,var(--text-muted),.96); margin: 0; }
+    .project{ position:relative; overflow:hidden; display: flex; flex-direction: column; }
+    .project .thumb{ height: 180px; background: linear-gradient(120deg, hsla(var(--h), 70%, 50%, .22), hsla(200, 90%, 70%, .22)); display:grid; place-items:center; color: hsl(var(--h), 90%, 80%); }
+    .project .thumb svg { width: 56px; height: 56px; }
+    .project .content{ padding: 16px; flex-grow: 1; display: flex; flex-direction: column; }
+    .project p { font-size: 0.92rem; color: hsla(0,0%,var(--text-muted),.96); margin: 0; flex-grow: 1; }
     .tagbar{ display:flex; flex-wrap:wrap; gap:6px; margin-top:12px }
     .tag{ font-size:.75rem; padding:6px 10px; border-radius: 999px; background: hsla(var(--h), 15%, 42%, .35); border: 1px solid hsla(var(--h),30%,70%,.18) }
 
@@ -175,14 +163,11 @@
     .meter{ width:160px; height:10px; background: hsla(var(--h), 20%, 40%, .35); border-radius:999px; overflow:hidden }
     .meter > i{ display:block; height:100%; background: linear-gradient(90deg, hsl(var(--h),var(--s),55%), hsl(var(--h),var(--s),70%)) }
 
-    /* Reveal on scroll */
     .reveal{ opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease }
     .reveal.visible{ opacity: 1; transform: translateY(0) }
 
-    /* Footer */
     footer{ padding: 60px 0; color: hsla(0,0%,var(--text-muted),.96) }
 
-    /* Light mode support */
     body.light{
       --l-bg: 96%;
       --l-panel: 98%;
@@ -197,7 +182,6 @@
     body.light .card{ border-color: hsla(var(--h),30%,40%,.18) }
     body.light .chip.active{ color:#061120 }
 
-    /* Command palette */
     .cmdk{position:fixed; inset:0; display:none; place-items:center; background:rgba(0,0,0,.45); z-index:80}
     .cmdk[open]{display:grid}
     .cmdk-panel{width:min(720px,92vw); background:var(--panel, #101827); border-radius:16px; padding:12px; border:1px solid hsla(var(--h),30%,60%,.25)}
@@ -206,27 +190,24 @@
     .cmdk li{padding:10px 12px; border-radius:10px; cursor:pointer}
     .cmdk li[aria-selected="true"], .cmdk li:hover{background:hsla(var(--h), 20%, 40%, .25)}
 
-    /* Toast */
     .toast{position:fixed; right:16px; bottom:16px; padding:12px 14px; border-radius:12px; background:hsla(var(--h), 20%, 30%, .8); color:#fff; border:1px solid hsla(var(--h),30%,60%,.25); box-shadow:var(--shadow); opacity:0; transform:translateY(8px); transition:all .3s ease; z-index:70}
     .toast.show{opacity:1; transform:translateY(0)}
 
-    /* Print */
     @media print{
       header, .chipbar, .btn, .tilt, .cmdk, .progress {display:none !important}
       .card{box-shadow:none !important; border:1px solid #ddd}
-      body{background:#fff; color:#000}
+      body{background:#fff; color:#000; padding-top: 0;}
     }
 
-    /* Canvas backdrop (constellation) */
     #bg{position:fixed; inset:0; z-index:-1}
   </style>
 </head>
 <body>
   <a href="#main" class="pill" style="position:absolute;left:-9999px;top:auto" onfocus="this.style.left='16px'">Skip to content</a>
   <canvas id="bg" aria-hidden="true"></canvas>
-  <div class="progress" id="progress"></div>
 
   <header>
+    <div class="progress" id="progress"></div>
     <div class="container nav">
       <div class="brand">
         <div class="logo" aria-hidden="true">
@@ -268,8 +249,8 @@
           <button class="btn" id="copyEmail">Copy Email</button>
         </div>
         <div class="stats" aria-label="Quick stats">
-          <div class="stat" data-count="5"><b><span class="counter">0</span>+ Projects</b><small>Full‑stack, ML & IoT</small></div>
-          <div class="stat" data-count="6"><b><span class="counter">0</span> Hackathons</b><small>Finalist & Winner</small></div>
+          <div class="stat" data-count="25"><b><span class="counter">0</span>+ Projects</b><small>Full‑stack, ML & IoT</small></div>
+          <div class="stat" data-count="8"><b><span class="counter">0</span> Hackathons</b><small>Finalist & Winner</small></div>
           <div class="stat" data-count="5"><b><span class="counter">0</span> Workshops</b><small>Organized for peers</small></div>
         </div>
       </div>
@@ -280,7 +261,7 @@
 
     <section id="about" class="section container reveal card" style="padding:28px">
       <h2>About Me</h2>
-      <p class="lead">I'm a software engineer who enjoys turning complex problems into elegant, user‑friendly experiences. My work blends real‑world experience developing scalable web applications using Angular, Node.js, and MySQL. I actively contribute to team projects by delivering features on time and writing maintainable code using modern development practices.</p>
+      <p class="lead">I'm an aspiring software engineer who enjoys turning complex problems into elegant, user‑friendly experiences. My work blends real‑world experience developing scalable web applications using Angular, Node.js, and MySQL. I actively contribute to team projects by delivering features on time and writing maintainable code using modern development practices.</p>
       <div class="chipbar" role="list">
         <span class="chip" role="listitem">#FullStackDev</span>
         <span class="chip" role="listitem">#IoT</span>
@@ -320,10 +301,11 @@
         <button class="chip" data-filter="mobile">Mobile/IoT</button>
         <input class="pill" id="searchProjects" placeholder="Search projects…" style="margin-left:auto" aria-label="Search projects">
       </div>
-
       <div class="grid grid-3" id="projectGrid">
         <article class="card project tilt" data-tags="fullstack" tabindex="0">
-          <div class="thumb" aria-hidden="true">📚</div>
+          <div class="thumb" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
           <div class="content">
             <h3>Book Library Application</h3>
             <p>Engineered a multi‑user library app with optimized query indexing, slashing data lookup time by 50%.</p>
@@ -332,7 +314,9 @@
           </div>
         </article>
         <article class="card project tilt" data-tags="ml" tabindex="0">
-          <div class="thumb" aria-hidden="true">📈</div>
+          <div class="thumb" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20V16"/></svg>
+          </div>
           <div class="content">
             <h3>Market Basket Analysis</h3>
             <p>Interactive Tableau dashboard to analyze product co‑purchase patterns, sales trends, KPIs, and customer insights.</p>
@@ -341,25 +325,31 @@
           </div>
         </article>
         <article class="card project tilt" data-tags="ml" tabindex="0">
-          <div class="thumb" aria-hidden="true">🌾</div>
+          <div class="thumb" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="M14.5 9.5 12 12l-2.5-2.5"/><path d="m12 12 2.5 2.5"/><path d="m12 12-2.5 2.5"/></svg>
+          </div>
           <div class="content">
             <h3>Spatial Crop Yield Prediction</h3>
             <p>Deployed an ML model via a Streamlit web app to predict crop yields using spatial data, optimizing resource allocation.</p>
-            <div class="tagbar"><span class="tag">Python</span><span class="tag">Machine Learning</span><span class="tag">Streamlit</span></div>
+            <div class="tagbar"><span class="tag">Python</span><span class="tag">ML</span><span class="tag">Streamlit</span></div>
             <div class="chipbar"><a class="chip" href="https://github.com/Abijithsv/Spatial-Crop-Yield-Prediction-Model" target="_blank" rel="noopener">GitHub</a> <button class="chip openModal">Details</button></div>
           </div>
         </article>
         <article class="card project tilt" data-tags="mobile" tabindex="0">
-          <div class="thumb" aria-hidden="true">💧</div>
+          <div class="thumb" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/><path d="M12 12 a2 2 0 1 0 0-4 a2 2 0 0 0 0 4z"/></svg>
+          </div>
           <div class="content">
             <h3>Jaldi.in – Water Management</h3>
             <p>SIH '24 project integrating predictive maintenance, QGIS leak mapping, and payments in an Android app.</p>
-            <div class="tagbar"><span class="tag">Android</span><span class="tag">Firebase</span><span class="tag">Python</span><span class="tag">QGIS</span></div>
+            <div class="tagbar"><span class="tag">Android</span><span class="tag">Firebase</span><span class="tag">QGIS</span></div>
             <div class="chipbar"><button class="chip openModal">Details</button></div>
           </div>
         </article>
         <article class="card project tilt" data-tags="ml" tabindex="0">
-          <div class="thumb" aria-hidden="true">📰</div>
+          <div class="thumb" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-5"/><path d="M12 8V2"/><path d="m4.93 4.93 2.12 2.12"/><path d="M16.95 16.95 19.07 19.07"/><path d="M2 12h6"/><path d="M16 12h6"/><path d="m4.93 19.07 2.12-2.12"/><path d="M16.95 7.05 19.07 4.93"/></svg>
+          </div>
           <div class="content">
             <h3>Truth Mesh Fake News Detection</h3>
             <p>A crowd‑sourced verification platform with NLP pipelines and classification models, achieving 85%+ accuracy.</p>
@@ -368,7 +358,9 @@
           </div>
         </article>
         <article class="card project tilt" data-tags="mobile" tabindex="0">
-          <div class="thumb" aria-hidden="true">🧠</div>
+          <div class="thumb" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5.52 19c.64-2.2 1.84-3 3.22-3h6.52c1.38 0 2.58.8 3.22 3"/><path d="M12 10a4 4 0 1 0 0-8 4 4 0 0 0 0 8"/><path d="M19 21a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2z"/></svg>
+          </div>
           <div class="content">
             <h3>Dementia‑Assist Application</h3>
             <p>SIH '23 assistive app with reminders, cognitive exercises, and geofencing for patient safety and caregiver support.</p>
@@ -415,22 +407,22 @@
 
     <section id="achievements" class="section container reveal">
       <h2>Achievements</h2>
-      <div class="timeline">
-        <div class="tl-item card" style="padding:14px">
-          <strong>2× Smart India Hackathon Finalist (2023 & 2024)</strong>
-          <p style="margin:8px 0">Selected among 86,000+ teams; built GIS water management and dementia‑assist solutions.</p>
+      <div class="grid grid-2">
+        <div class="card" style="padding:14px">
+          <h3>2× Smart India Hackathon Finalist (2023 & 2024)</h3>
+          <p style="margin:8px 0; color: hsla(0,0%,var(--text-muted),.96)">Selected among 86,000+ teams; built GIS water management and dementia‑assist solutions.</p>
         </div>
-        <div class="tl-item card" style="padding:14px">
-          <strong>TATA Communication Hackathon Runner‑Up (2023)</strong>
-          <p style="margin:8px 0">Created “Truth Mesh”, a fake news verification platform using NLP and real‑time sync.</p>
+        <div class="card" style="padding:14px">
+          <h3>TATA Communication Hackathon Runner‑Up (2023)</h3>
+          <p style="margin:8px 0; color: hsla(0,0%,var(--text-muted),.96)">Created “Truth Mesh”, a fake news verification platform using NLP and real‑time sync.</p>
         </div>
-        <div class="tl-item card" style="padding:14px">
-          <strong>Top 10 @ IIT Madras Hackathon</strong>
-          <p style="margin:8px 0">Designed an AI‑powered crop disease detection solution, ranked top 10 out of 1,318 teams.</p>
+        <div class="card" style="padding:14px">
+          <h3>Top 10 @ IIT Madras Hackathon</h3>
+          <p style="margin:8px 0; color: hsla(0,0%,var(--text-muted),.96)">Designed an AI‑powered crop disease detection solution, ranked top 10 out of 1,318 teams.</p>
         </div>
-        <div class="tl-item card" style="padding:14px">
-          <strong>Oracle APEX Hackathon Winner</strong>
-          <p style="margin:8px 0">Developed a low‑code incident reporting app for an NGO, reducing documentation time by 60%.</p>
+        <div class="card" style="padding:14px">
+          <h3>Oracle APEX Hackathon Winner</h3>
+          <p style="margin:8px 0; color: hsla(0,0%,var(--text-muted),.96)">Developed a low‑code incident reporting app for an NGO, reducing documentation time by 60%.</p>
         </div>
       </div>
     </section>
@@ -485,7 +477,6 @@
     </div>
   </footer>
 
-  <!-- Command palette dialog -->
   <dialog class="cmdk" id="cmdk" aria-label="Command palette">
     <div class="cmdk-panel">
       <input id="cmdInput" placeholder="Type a command: go projects, filter ml, hue 195, theme light… (Esc to close)" aria-label="Command input"/>
@@ -493,7 +484,6 @@
     </div>
   </dialog>
 
-  <!-- Modal dialog for project details -->
   <dialog id="projectModal" class="card" style="border:none; max-width:min(720px, 92vw);">
     <article style="padding:18px">
       <header style="display:flex; justify-content:space-between; align-items:center; gap:10px">
@@ -504,13 +494,9 @@
     </article>
   </dialog>
 
-  <!-- Toast -->
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script>
-    /* =====================
-        SMOOTH REVEAL ON SCROLL + SCROLLSPY + PROGRESS
-        ===================== */
     const io = new IntersectionObserver((entries)=>{
       entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
     }, { threshold:.12 });
@@ -533,15 +519,12 @@
     const progress = document.getElementById('progress');
     const setProgress = ()=>{
       const h = document.documentElement;
-      const scrolled = (h.scrollTop)/(h.scrollHeight - h.clientHeight);
+      const scrolled = (h.scrollTop - h.querySelector('header').offsetHeight)/(h.scrollHeight - h.clientHeight - h.querySelector('header').offsetHeight);
       progress.style.width = (scrolled*100).toFixed(2)+'%';
     };
     setProgress();
     document.addEventListener('scroll', setProgress, {passive:true});
 
-    /* =====================
-        THEME TOGGLE + PERSISTENCE + HUE CONTROL
-        ===================== */
     const toggle = document.getElementById('modeToggle');
     const hue = document.getElementById('hue');
     const metaTheme = document.getElementById('themeColorMeta');
@@ -572,9 +555,6 @@
       showToast('Hue set to ' + hue.value);
     })
 
-    /* =====================
-        3D TILT HOVER (fixed string template)
-        ===================== */
     const applyTilt = (el)=>{
       let rID = null;
       const onMove = (e)=>{
@@ -593,9 +573,6 @@
     };
     document.querySelectorAll('.tilt').forEach(applyTilt);
 
-    /* =====================
-        PROJECT FILTERS + SEARCH
-        ===================== */
     const filterBar = document.getElementById('filterBar');
     const projects = Array.from(document.querySelectorAll('#projectGrid .project'));
     const searchBox = document.getElementById('searchProjects');
@@ -622,7 +599,6 @@
     });
     searchBox.addEventListener('input', applyFilters);
 
-    // Modal for project details
     const modal = document.getElementById('projectModal');
     const modalTitle = document.getElementById('modalTitle');
     const modalBody = document.getElementById('modalBody');
@@ -640,9 +616,6 @@
       modal.showModal();
     });
 
-    /* =====================
-        STATS COUNTER (respect reduced motion)
-        ===================== */
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const counters = document.querySelectorAll('.stat');
     const counterIO = new IntersectionObserver((entries)=>{
@@ -661,9 +634,6 @@
     }, {threshold:.6});
     counters.forEach(c=>counterIO.observe(c));
 
-    /* =====================
-        SKILLS: shuffle / sort
-        ===================== */
     const skillsList = document.getElementById('skillsList');
     const skillNodes = Array.from(skillsList.children);
     document.getElementById('shuffleSkills').addEventListener('click', ()=>{
@@ -675,9 +645,6 @@
       arr.forEach(n=>skillsList.appendChild(n));
     });
 
-    /* =====================
-        CONTACT FORM (client‑side validation) + COPY EMAIL + RÉSUMÉ DOWNLOAD
-        ===================== */
     const form = document.getElementById('contactForm');
     form.addEventListener('submit', (e)=>{
       e.preventDefault();
@@ -695,19 +662,6 @@
       catch{ showToast('Could not copy email'); }
     });
 
-    document.getElementById('downloadResume').addEventListener('click', (e)=>{
-      e.preventDefault();
-      const blob = new Blob([
-        `Abijith S V — Résumé\n\nFull-Stack Developer \nEmail: abijith1908@gmail.com\nGitHub: github.com/Abijithsv\nLinkedIn: linkedin.com/in/its-abijith\n\nProjects: Book Library, Market Basket Analysis, Spatial Crop Yield Prediction, Jaldi.in Water Management, Truth Mesh, Dementia‑Assist.\n\nExperience: Matrimony.com (Trainee), BCT (IoT Intern), Business Web Solutions (Web Dev Intern).\n\nEducation: B.Tech CSE (IoT & Automation) @ SASTRA.\n`], {type:'text/plain'});
-      const url = URL.createObjectURL(blob);
-      const a = Object.assign(document.createElement('a'), {href:url, download:'Abijith_S_V_Resume.txt'});
-      document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
-      showToast('Résumé downloaded');
-    });
-
-    /* =====================
-        COMMAND PALETTE (Ctrl/Cmd+K)
-        ===================== */
     const cmd = document.getElementById('cmdk');
     const cmdInput = document.getElementById('cmdInput');
     const cmdList = document.getElementById('cmdList');
@@ -757,9 +711,6 @@
       if(btn){ btn.click(); showToast('Filter: '+tag); }
     }
 
-    /* =====================
-        YEAR & TOAST
-        ===================== */
     document.getElementById('year').textContent = new Date().getFullYear();
     const toast = document.getElementById('toast');
     let toastTimer;
@@ -769,29 +720,47 @@
       toastTimer = setTimeout(()=>toast.classList.remove('show'), 2400);
     }
 
-    /* =====================
-        CONSTELLATION BACKDROP (canvas, tiny + efficient)
-        ===================== */
     const canvas = document.getElementById('bg');
     const ctx = canvas.getContext('2d');
-    let W,H,stars=[];
+    let W,H,stars=[],mouse={x:null,y:null};
     const dpr = Math.min(2, window.devicePixelRatio||1);
-    function resize(){ W = canvas.width = innerWidth*dpr; H = canvas.height = innerHeight*dpr; canvas.style.width=innerWidth+'px'; canvas.style.height=innerHeight+'px'; stars = Array.from({length: Math.round((W*H)/60000)}, ()=>({x:Math.random()*W, y:Math.random()*H, r:Math.random()*1.6+0.2, vx:(Math.random()-.5)*.12, vy:(Math.random()-.5)*.12})); }
+    function resize(){ W = canvas.width = innerWidth*dpr; H = canvas.height = innerHeight*dpr; canvas.style.width=innerWidth+'px'; canvas.style.height=innerHeight+'px'; stars = Array.from({length: Math.round((W*H)/50000)}, ()=>({x:Math.random()*W, y:Math.random()*H, r:Math.random()*1.6+0.2, vx:(Math.random()-.5)*.12, vy:(Math.random()-.5)*.12})); }
     resize(); addEventListener('resize', resize);
+    addEventListener('mousemove', e=>{mouse.x=e.clientX*dpr;mouse.y=e.clientY*dpr});
+
     function step(){
       ctx.clearRect(0,0,W,H);
-      ctx.fillStyle = `hsla(${getComputedStyle(document.documentElement).getPropertyValue('--h')}, 70%, 60%, .9)`;
+      const C = `hsla(${getComputedStyle(document.documentElement).getPropertyValue('--h')}, 70%, 60%, .9)`;
+      ctx.fillStyle = C;
       for(const s of stars){
         s.x+=s.vx; s.y+=s.vy; if(s.x<0) s.x=W; if(s.x>W) s.x=0; if(s.y<0) s.y=H; if(s.y>H) s.y=0;
         ctx.beginPath(); ctx.arc(s.x, s.y, s.r*dpr, 0, Math.PI*2); ctx.fill();
+        
+        for(const s2 of stars){
+            const dist = Math.sqrt(Math.pow(s.x-s2.x, 2) + Math.pow(s.y-s2.y, 2));
+            if(dist < 120 * dpr){
+                ctx.beginPath();
+                ctx.moveTo(s.x, s.y);
+                ctx.lineTo(s2.x, s2.y);
+                ctx.strokeStyle = `hsla(${getComputedStyle(document.documentElement).getPropertyValue('--h')}, 70%, 60%, ${ (1 - dist / (120*dpr)) * 0.5 })`;
+                ctx.stroke();
+            }
+        }
+        if (mouse.x) {
+            const dist = Math.sqrt(Math.pow(s.x-mouse.x, 2) + Math.pow(s.y-mouse.y, 2));
+            if(dist < 150 * dpr){
+                ctx.beginPath();
+                ctx.moveTo(s.x, s.y);
+                ctx.lineTo(mouse.x, mouse.y);
+                ctx.strokeStyle = `hsla(${getComputedStyle(document.documentElement).getPropertyValue('--h')}, 70%, 60%, ${ (1 - dist / (150*dpr)) * 0.6 })`;
+                ctx.stroke();
+            }
+        }
       }
       if(!reduceMotion) requestAnimationFrame(step);
     }
     if(!reduceMotion) requestAnimationFrame(step);
 
-    /* =====================
-        KEYBOARD SHORTCUTS FOR SECTIONS
-        ===================== */
     const shortcuts = { 'g p':'#projects', 'g s':'#skills', 'g e':'#experience', 'g a':'#about', 'g c':'#contact' };
     let buffer='';
     document.addEventListener('keydown', (e)=>{
@@ -804,492 +773,3 @@
   </script>
 </body>
 </html>
-
-
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abijith S V - Data Engineer Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <style>
-        /* Custom Styles */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0a192f;
-            color: #ccd6f6;
-        }
-
-        #bg-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-
-        /* --- Loader Animation --- */
-        #loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #0a192f;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease-out;
-        }
-        .spinner {
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            border: 9px solid;
-            border-color: #dbdcef;
-            border-right-color: #64ffda;
-            animation: spinner-d3wgkg 1s infinite linear;
-        }
-        @keyframes spinner-d3wgkg {
-            to {
-                transform: rotate(1turn);
-            }
-        }
-
-        /* --- Scroll Reveal Animation --- */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* --- General Styling & Hover Effects --- */
-        .section-card {
-            background-color: rgba(17, 34, 64, 0.85);
-            backdrop-filter: blur(10px);
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid #233554;
-        }
-        .section-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px -15px rgba(2,12,27,0.7);
-        }
-        .highlight {
-            color: #64ffda;
-        }
-        .link-hover {
-            display: inline-block;
-            transition: transform 0.2s ease-out;
-        }
-        .link-hover:hover {
-            color: #64ffda;
-            transform: translateY(-3px);
-        }
-        .tag {
-            background-color: #162b4d;
-            color: #64ffda;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 500;
-        }
-        h2 {
-            display: flex;
-            align-items: center;
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: #ccd6f6;
-        }
-        h2::after {
-            content: '';
-            display: block;
-            position: relative;
-            top: 0px;
-            width: 200px;
-            height: 1px;
-            margin-left: 20px;
-            background-color: #233554;
-        }
-        .profile-image {
-            border: 3px solid #64ffda;
-            box-shadow: 0 0 20px rgba(100, 255, 218, 0.5);
-        }
-    </style>
-</head>
-<body class="antialiased">
-
-    <canvas id="bg-canvas"></canvas>
-
-    <!-- Loader -->
-    <div id="loader">
-        <div class="spinner"></div>
-    </div>
-
-    <!-- Main Content -->
-    <div id="content" class="invisible container mx-auto max-w-4xl px-6 py-12 md:py-20 relative z-10">
-
-        <!-- Header -->
-        <header class="mb-16 reveal">
-            <div class="flex flex-col md:flex-row items-center gap-8 text-center md:text-left">
-                <img src="abijith_sv.jpg" 
-                     alt="Abijith S V" 
-                     class="w-40 h-40 rounded-full profile-image"
-                     onerror="this.onerror=null;this.src='https://placehold.co/400x400/0a192f/64ffda?text=ASV';">
-                <div>
-                    <h1 class="text-4xl md:text-6xl font-black text-white tracking-tight">Abijith S V</h1>
-                    <h2 class="text-xl md:text-2xl mt-2 font-bold highlight">Aspiring Data Engineer</h2>
-                    <p class="mt-4 max-w-2xl text-slate-400">
-                        Hands-on experience in developing data-driven applications and IoT data pipelines. Eager to contribute to impactful data engineering projects.
-                    </p>
-                    <div class="mt-6 flex justify-center md:justify-start items-center space-x-6 text-xl">
-                        <a href="mailto:abijith1908@gmail.com" class="link-hover text-slate-300"><i class="fas fa-envelope"></i></a>
-                        <a href="tel:+917904964315" class="link-hover text-slate-300"><i class="fas fa-phone"></i></a>
-                        <a href="https://linkedin.com/in/its-abijith" target="_blank" class="link-hover text-slate-300"><i class="fab fa-linkedin"></i></a>
-                        <a href="https://github.com/Abijithsv" target="_blank" class="link-hover text-slate-300"><i class="fab fa-github"></i></a>
-                    </div>
-                </div>
-            </div>
-        </header>
-
-        <main class="space-y-16">
-            <!-- Education -->
-            <section id="education" class="reveal">
-                <h2 class="mb-6">Education</h2>
-                <div class="space-y-6">
-                    <div class="section-card">
-                        <div class="flex justify-between items-start">
-                            <h3 class="font-bold text-lg text-white">SASTRA Deemed University</h3>
-                            <p class="text-sm text-slate-400">Oct 2022 – Present</p>
-                        </div>
-                        <p class="text-slate-300">B.Tech, Computer Science Engineering (IoT & Automation)</p>
-                        <p class="text-sm text-slate-400 mt-1">GPA: 8.18 / 10.0</p>
-                    </div>
-                    <div class="section-card">
-                        <div class="flex justify-between items-start">
-                            <h3 class="font-bold text-lg text-white">St. Britto's Academy (CBSE)</h3>
-                            <p class="text-sm text-slate-400">June 2020 – May 2022</p>
-                        </div>
-                        <p class="text-slate-300">Higher Secondary Education</p>
-                        <p class="text-sm text-slate-400 mt-1">Percentage: 93.6%</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Experience -->
-            <section id="experience" class="reveal">
-                <h2 class="mb-6">Experience</h2>
-                <div class="space-y-6">
-                    <div class="section-card">
-                        <div class="flex justify-between items-start">
-                            <h3 class="font-bold text-lg text-white">Full-Stack Developer Trainee</h3>
-                            <p class="text-sm text-slate-400">Dec 2024 – Apr 2025</p>
-                        </div>
-                        <p class="highlight font-medium">Matrimony.com</p>
-                        <p class="mt-3 text-slate-400">Engineered an Angular/Node.js/Express/MySQL library app serving multiple users, slashing lookup
-time by 50% via optimized query indexing.</p>
-                    </div>
-                    <div class="section-card">
-                        <div class="flex justify-between items-start">
-                            <h3 class="font-bold text-lg text-white">IoT Intern</h3>
-                            <p class="text-sm text-slate-400">Jun 2024 – Jul 2024</p>
-                        </div>
-                        <p class="highlight font-medium">Bahwan CyberTek</p>
-                        <p class="mt-3 text-slate-400">Designed and deployed a real-time IoT data pipeline using ActiveMQ, enhancing data throughput and enabling seamless integration of diverse sensor data for industrial monitoring applications.</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Projects -->
-            <section id="projects" class="reveal">
-                <h2 class="mb-6">Projects</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Project 1 -->
-                    <div class="section-card flex flex-col">
-                        <div class="flex-grow">
-                            <div class="flex justify-between items-center mb-2">
-                                <i class="fas fa-chart-bar text-2xl highlight"></i>
-                                <a href="https://github.com/Abijithsv/Market-Basket-Analysis-Dashboard" target="_blank" class="link-hover text-slate-300 text-xl"><i class="fab fa-github"></i></a>
-                            </div>
-                            <h3 class="font-bold text-lg text-white mb-2">Market Basket Analysis Dashboard</h3>
-                            <p class="text-slate-400 text-sm">Built an interactive Tableau dashboard to analyze transactional data and identify co-purchase patterns, extracting actionable sales trends.</p>
-                        </div>
-                        <div class="flex flex-wrap gap-2 mt-4">
-                            <span class="tag">Tableau</span>
-                            <span class="tag">Data Cleaning</span>
-                            <span class="tag">Association Rules</span>
-                        </div>
-                    </div>
-                    <!-- Project 2 -->
-                    <div class="section-card flex flex-col">
-                        <div class="flex-grow">
-                            <div class="flex justify-between items-center mb-2">
-                                <i class="fas fa-book-open text-2xl highlight"></i>
-                                <a href="https://github.com/Abijithsv/Online_Book_Library.git" target="_blank" class="link-hover text-slate-300 text-xl"><i class="fab fa-github"></i></a>
-                            </div>
-                            <h3 class="font-bold text-lg text-white mb-2">Book Library Application</h3>
-                            <p class="text-slate-400 text-sm">Engineered a scalable application for multi-user data management, achieving a 50% reduction in data lookup time through optimized query indexing.</p>
-                        </div>
-                        <div class="flex flex-wrap gap-2 mt-4">
-                            <span class="tag">Angular</span>
-                            <span class="tag">Node.js</span>
-                            <span class="tag">MySQL</span>
-                            <span class="tag">Indexing</span>
-                        </div>
-                    </div>
-                    <!-- Project 3 -->
-                    <div class="section-card flex flex-col">
-                        <div class="flex-grow">
-                            <div class="flex justify-between items-center mb-2">
-                                <i class="fas fa-water text-2xl highlight"></i>
-                                <a href="https://github.com/Abijithsv/Jaldi---Water-Management-Portal--SIH-24" target="_blank" class="link-hover text-slate-300 text-xl"><i class="fab fa-github"></i></a>
-                            </div>
-                            <h3 class="font-bold text-lg text-white mb-2">Jaldi.in – Water Management System</h3>
-                            <p class="text-slate-400 text-sm">Developed a data-centric solution for Smart India Hackathon 2024 integrating QGIS spatial data and real-time incident reporting via a Firebase backend.</p>
-                        </div>
-                        <div class="flex flex-wrap gap-2 mt-4">
-                            <span class="tag">SIH 2024</span>
-                            <span class="tag">QGIS</span>
-                            <span class="tag">Firebase</span>
-                            <span class="tag">Spatial Data</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Technical Skills -->
-            <section id="skills" class="reveal">
-                <h2 class="mb-6">Technical Skills</h2>
-                <div class="section-card">
-                    <div class="grid grid-cols-2 md:grid-cols-3 gap-6 text-slate-300">
-                        <div>
-                            <h4 class="font-bold text-white mb-2">Languages</h4>
-                            <ul class="space-y-1">
-                                <li><i class="fab fa-python mr-2 highlight w-4 text-center"></i>Python</li>
-                                <li><i class="fas fa-database mr-2 highlight w-4 text-center"></i>SQL</li>
-                                <li><i class="fas fa-c mr-2 highlight w-4 text-center"></i>++</li>
-                                <li><i class="fab fa-js-square mr-2 highlight w-4 text-center"></i>JavaScript</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-white mb-2">Analytics & Viz</h4>
-                            <ul class="space-y-1">
-                                <li><i class="fas fa-chart-pie mr-2 highlight w-4 text-center"></i>Tableau</li>
-                                <li><i class="fas fa-chart-line mr-2 highlight w-4 text-center"></i>Power BI</li>
-                                <li><i class="fas fa-project-diagram mr-2 highlight w-4 text-center"></i>Association Rules</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-white mb-2">Databases & Pipelines</h4>
-                            <ul class="space-y-1">
-                                <li><i class="fas fa-server mr-2 highlight w-4 text-center"></i>MySQL</li>
-                                <li><i class="fas fa-fire mr-2 highlight w-4 text-center"></i>Firebase</li>
-                                <li><i class="fas fa-exchange-alt mr-2 highlight w-4 text-center"></i>ActiveMQ</li>
-                            </ul>
-                        </div>
-                        <div class="col-span-2 md:col-span-3">
-                            <h4 class="font-bold text-white mb-2">Frameworks & Libraries</h4>
-                            <div class="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-2">
-                                <span><i class="fab fa-python mr-2 highlight w-4 text-center"></i>Pandas</span>
-                                <span><i class="fab fa-python mr-2 highlight w-4 text-center"></i>NumPy</span>
-                                <span><i class="fas fa-stream mr-2 highlight w-4 text-center"></i>Streamlit</span>
-                                <span><i class="fas fa-cogs mr-2 highlight w-4 text-center"></i>mlxtend</span>
-                                <span><i class="fab fa-node-js mr-2 highlight w-4 text-center"></i>Node.js</span>
-                                <span><i class="fab fa-angular mr-2 highlight w-4 text-center"></i>Angular</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Achievements -->
-            <section id="achievements" class="reveal">
-                <h2 class="mb-6">Achievements</h2>
-                <div class="section-card">
-                    <ul class="space-y-4 list-none">
-                        <li class="flex items-start">
-                            <i class="fas fa-trophy mr-4 mt-1 highlight"></i>
-                            <div>
-                                <h4 class="font-bold text-white">2× Smart India Hackathon Finalist (2023, 2024)</h4>
-                                <p class="text-slate-400 text-sm">Recognized for developing innovative, data-driven solutions for water resource management (GIS) and healthcare.</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-trophy mr-4 mt-1 highlight"></i>
-                            <div>
-                                <h4 class="font-bold text-white">TATA Communication Hackathon Runner-Up (2023)</h4>
-                                <p class="text-slate-400 text-sm">Co-developed a platform to verify news authenticity, demonstrating strong analytical skills in combating misinformation.</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start">
-                           <i class="fas fa-trophy mr-4 mt-1 highlight"></i>
-                           <div>
-                                <h4 class="font-bold text-white">Oracle APEX Hackathon Winner</h4>
-                                <p class="text-slate-400 text-sm">Built a low-code data collection and reporting application that streamlined NGO operations, reducing documentation time by 60%.</p>
-                            </div>
-                        </li>
-                         <li class="flex items-start">
-                           <i class="fas fa-award mr-4 mt-1 highlight"></i>
-                           <div>
-                                <h4 class="font-bold text-white">Best Outgoing Student (2022)</h4>
-                                <p class="text-slate-400 text-sm">Awarded for outstanding academic performance (top 2%) and leadership at St. Britto's Academy.</p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </section>
-        </main>
-
-        <footer class="text-center mt-20 text-slate-500 text-sm reveal">
-            <p>Designed & Built by Abijith S V</p>
-        </footer>
-
-    </div>
-
-    <script>
-        // --- Page Loader ---
-        window.addEventListener('load', () => {
-            const loader = document.getElementById('loader');
-            const content = document.getElementById('content');
-            
-            setTimeout(() => {
-                loader.style.opacity = '0';
-                loader.addEventListener('transitionend', () => {
-                    loader.style.display = 'none';
-                    content.classList.remove('invisible');
-                    // Trigger the first set of animations
-                    revealSections(); 
-                });
-            }, 500); // Minimum loader display time
-        });
-
-        // --- Scroll Reveal Animation ---
-        function revealSections() {
-            const revealElements = document.querySelectorAll('.reveal');
-            const windowHeight = window.innerHeight;
-
-            for (let i = 0; i < revealElements.length; i++) {
-                const elementTop = revealElements[i].getBoundingClientRect().top;
-                const elementVisible = 150; // Distance from bottom of viewport to trigger animation
-
-                if (elementTop < windowHeight - elementVisible) {
-                    revealElements[i].classList.add('visible');
-                }
-            }
-        }
-        
-        window.addEventListener('scroll', revealSections);
-        
-        // --- Three.js Background Animation ---
-        let scene, camera, renderer, stars, comets;
-        const cometVels = [];
-
-        function init() {
-            scene = new THREE.Scene();
-            camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
-            camera.position.z = 5;
-
-            renderer = new THREE.WebGLRenderer({
-                canvas: document.querySelector('#bg-canvas'),
-                alpha: true
-            });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-
-            // Create stationary stars
-            const starGeo = new THREE.BufferGeometry();
-            const starCount = 6000;
-            const posArray = new Float32Array(starCount * 3);
-            for(let i = 0; i < starCount * 3; i++) {
-                posArray[i] = (Math.random() - 0.5) * 100;
-            }
-            starGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-            const starMaterial = new THREE.PointsMaterial({
-                size: 0.05,
-                color: 0x64ffda,
-                transparent: true,
-                opacity: 0.8
-            });
-            stars = new THREE.Points(starGeo, starMaterial);
-            scene.add(stars);
-
-            // Create fast-moving comets (streaks)
-            const cometGeo = new THREE.BufferGeometry();
-            const cometCount = 200;
-            const cometPosArray = new Float32Array(cometCount * 3);
-            for (let i = 0; i < cometCount; i++) {
-                cometPosArray[i*3] = (Math.random() - 0.5) * 200;
-                cometPosArray[i*3+1] = (Math.random() - 0.5) * 200;
-                cometPosArray[i*3+2] = (Math.random() - 0.5) * 200;
-                cometVels.push({
-                    x: (Math.random() - 0.5) * 0.5,
-                    y: (Math.random() - 0.5) * 0.5,
-                    z: (Math.random() - 0.5) * 0.5
-                });
-            }
-            cometGeo.setAttribute('position', new THREE.BufferAttribute(cometPosArray, 3));
-            const cometMaterial = new THREE.PointsMaterial({
-                size: 0.4,
-                color: 0xffffff,
-                transparent: true,
-                opacity: 0.9,
-                blending: THREE.AdditiveBlending
-            });
-            comets = new THREE.Points(cometGeo, cometMaterial);
-            scene.add(comets);
-
-
-            window.addEventListener('resize', onWindowResize, false);
-            
-            animate();
-        }
-
-        function onWindowResize() {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        }
-
-        function animate() {
-            // Animate stars
-            stars.rotation.y += 0.0001;
-            stars.rotation.x += 0.0001;
-
-            // Animate comets
-            const positions = comets.geometry.attributes.position.array;
-            for (let i = 0; i < positions.length / 3; i++) {
-                positions[i*3] += cometVels[i].x;
-                positions[i*3+1] += cometVels[i].y;
-                positions[i*3+2] += cometVels[i].z;
-
-                // Reset position if out of bounds
-                if (positions[i*3] > 100 || positions[i*3] < -100) positions[i*3] = (Math.random() - 0.5) * 200;
-                if (positions[i*3+1] > 100 || positions[i*3+1] < -100) positions[i*3+1] = (Math.random() - 0.5) * 200;
-                if (positions[i*3+2] > 100 || positions[i*3+2] < -100) positions[i*3+2] = (Math.random() - 0.5) * 200;
-            }
-            comets.geometry.attributes.position.needsUpdate = true;
-
-
-            renderer.render(scene, camera);
-            requestAnimationFrame(animate);
-        }
-
-        init();
-    </script>
-</body>
-</html>
-
-
- -->
